@@ -1,0 +1,11 @@
+name = "furniture-app"
+compatibility_date = "2025-05-20"
+pages_build_output_dir = "build" # ✅ Pagesではこの1行だけでOK！
+
+[[d1_databases]]
+binding = "DB"
+database_name = "my-burrow-db"
+database_id = "32eb9384-6ba4-47e3-86a7-a6383bda4875"
+
+[functions]
+directory = "functions"
