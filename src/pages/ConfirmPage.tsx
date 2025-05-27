@@ -10,6 +10,8 @@ import { postOrder } from '../api/orderApi';
 
 const ConfirmPage = () => {
   const navigate = useNavigate();
+
+  //  Cart 
   const [cartItems, setCartItems] = useState<any[]>([]);
 
   // Load logged-in user data from localStorage
@@ -20,7 +22,7 @@ const ConfirmPage = () => {
 
   // Load cart data from localStorage when the component mounts
   useEffect(() => {
-    const stored = localStorage.getItem('cart');
+    const stored = localStorage.getItem('cart'); // Get cart & from localStorage
     if (stored) setCartItems(JSON.parse(stored));
   }, []);
 
@@ -34,8 +36,9 @@ const ConfirmPage = () => {
 
     // Send the order to the backend and clear the cart after success
     postOrder(newOrder).then(() => {
-      localStorage.removeItem('cart');
-      navigate('/order-history');
+      localStorage.removeItem('cart'); // Remove cart
+
+      navigate('/order-history'); // Go to history page
     });
   };
 

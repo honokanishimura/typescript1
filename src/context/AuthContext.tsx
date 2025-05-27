@@ -21,28 +21,32 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Provide the context to all children (pages/components)
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  // Keep user data in memory (default is null)
+
+
+  // Manage as status
   const [user, setUser] = useState<User | null>(null);
+
 
   // On first load, check if user is saved in localStorage
   useEffect(() => {
     const storedUser = localStorage.getItem('authUser'); // Get from browser storage
     if (storedUser) {
       try {
-        // Try to convert text to object
+        // Try to convert
         setUser(JSON.parse(storedUser));
       } catch (err) {
+
         // If it fails, remove the data
         console.error('Failed to parse user from localStorage:', err);
         localStorage.removeItem('authUser');
       }
     }
-  }, []); // Only run once when page opens
+  }, []); // Only run once
 
   // When user logs in
   const login = (user: User) => {
-    setUser(user); // Save user in memory
-    localStorage.setItem('authUser', JSON.stringify(user)); // Save in browser
+    setUser(user); // Save status
+    localStorage.setItem('authUser', JSON.stringify(user)); // Save localStorage
   };
 
   // When user logs out

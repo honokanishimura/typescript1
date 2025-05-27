@@ -15,7 +15,8 @@ export async function onRequestPost(context: {
     const data = await context.request.json();
     const { userId, items, total } = data;
 
-    // Save the order into the database using placeholders to prevent injection
+
+    // Use .bind() → SQL
     await context.env.DB.prepare(
       'INSERT INTO orders (user_id, items, total) VALUES (?, ?, ?)'
     ).bind(userId, JSON.stringify(items), total).run();
@@ -25,8 +26,11 @@ export async function onRequestPost(context: {
       headers: { 'Content-Type': 'application/json' },
       status: 200,
     });
-  } catch (err: any) {
+
+
     // Send error response if something goes wrong
+
+  } catch (err: any) {
     return new Response(JSON.stringify({ error: 'Failed to save order', detail: err.message }), {
       headers: { 'Content-Type': 'application/json' },
       status: 500,

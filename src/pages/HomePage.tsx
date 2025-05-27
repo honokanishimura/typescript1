@@ -42,19 +42,16 @@ const HomePage = () => {
     Sofa: '/img/sofa_1.jpg',
   };
 
-  
-
-
-
   const { ref: bestsellerRef, inView: bestsellerInView } = useInView({ triggerOnce: false, threshold: 0.1 });
   const { ref: categoryRef, inView: categoryInView } = useInView({ triggerOnce: false, threshold: 0.1 });
   const { ref: categoryGridRef, inView: categoryGridInView } = useInView({ triggerOnce: false, threshold: 0.1 });
   const { ref: serviceRef, inView: serviceInView } = useInView({ triggerOnce: false, threshold: 0.1 });
 
-  useEffect(() => {
+ 
+  useEffect(() => {  // Use Api
     fetchItems().then((data) => {
       setItems(data);
-      const picked = pickRandomPerCategory(data);
+      const picked = pickRandomPerCategory(data); // By category
       setBestsellers(picked);
     });
   }, []);
@@ -63,10 +60,11 @@ const HomePage = () => {
     const categories = ['curtain', 'mirror', 'rug', 'sofa', 'chair', 'table', 'tvstand', 'plant'];
     let selected: Item[] = [];
 
+    // picks one random item from each category and saves
     categories.forEach(cat => {
       const filtered = allItems.filter(item => item.category.toLowerCase() === cat);
       if (filtered.length > 0) {
-        const randomItem = filtered[Math.floor(Math.random() * filtered.length)];
+        const randomItem = filtered[Math.floor(Math.random() * filtered.length)]; // 0~(length-1) index
         selected.push(randomItem);
       }
     });
@@ -126,7 +124,9 @@ const HomePage = () => {
             categoryGridInView ? 'opacity-100 animate-slideInLeft' : 'opacity-0'
           }`}
         >
-          {Object.entries(categoryImages).map(([cat, img]) => (
+          {Object.entries(categoryImages).map(([cat, img]) => (  //  Object.entries gets all key-value pairs from an object as a list.
+
+
             <a key={cat} href={`/category/${cat}`} className="flex-shrink-0 w-[220px] group">
               <div className="relative">
                 <img
