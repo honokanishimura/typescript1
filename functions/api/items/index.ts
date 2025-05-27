@@ -33,7 +33,7 @@ export async function onRequestGet(context: {
         status: 500,
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": "*", // Accept CORS
         },
       }
     );
@@ -45,6 +45,8 @@ export async function onRequestOptions(): Promise<Response> {
   return new Response(null, {
     status: 204,
     headers: {
+
+      // Accept CORS 
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
