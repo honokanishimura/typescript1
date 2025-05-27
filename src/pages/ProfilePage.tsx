@@ -1,4 +1,3 @@
-// src/pages/ProfilePage.tsx
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -9,30 +8,30 @@ import { CreditCard, MapPin, User, ArrowLeft } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 const ProfilePage = () => {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
-  const [editMode, setEditMode] = useState(false);
-  const [editedUser, setEditedUser] = useState(user);
+  const { user, logout } = useAuth(); // 🔹 Get current user and logout function
+  const navigate = useNavigate(); // 🔹 For page navigation
+  const [editMode, setEditMode] = useState(false); // 🔹 Toggle for edit mode
+  const [editedUser, setEditedUser] = useState(user); // 🔹 Copy of user data for editing
 
   useEffect(() => {
-    if (!user) navigate('/auth');
+    if (!user) navigate('/auth'); // 🔹 If no user, go to login page
   }, [user, navigate]);
 
   const handleSave = () => {
     if (editedUser) {
-      localStorage.setItem('authUser', JSON.stringify(editedUser));
+      localStorage.setItem('authUser', JSON.stringify(editedUser)); // 🔹 Save updated user to localStorage
       setEditMode(false);
-      toast.success('Profile updated successfully!');
+      toast.success('Profile updated successfully!'); // 🔹 Show success message
     }
   };
 
   const handleCancel = () => {
-    setEditedUser(user);
+    setEditedUser(user); // 🔹 Revert changes
     setEditMode(false);
-    toast('Changes cancelled.');
+    toast('Changes cancelled.'); // 🔹 Show cancel message
   };
 
-  if (!user) return null;
+  if (!user) return null; // 🔹 Don't show anything if no user
 
   return (
     <>
@@ -49,7 +48,7 @@ const ProfilePage = () => {
           </button>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Left: Profile Card */}
+            {/* 🔸 Left: Profile summary card */}
             <div className="bg-[#fffced] p-6 rounded-xl shadow-lg text-center space-y-4">
               <img src="/img/user_avatar.png" alt="User avatar" className="w-24 h-24 mx-auto rounded-full object-cover border-4 border-orange-200 shadow" />
               <h2 className="text-xl font-semibold text-gray-800 flex items-center justify-center gap-2">
@@ -65,8 +64,8 @@ const ProfilePage = () => {
                 </button>
                 <button
                   onClick={() => {
-                    logout();
-                    navigate('/');
+                    logout(); // 🔹 Call logout
+                    navigate('/'); // 🔹 Go to home page
                   }}
                   className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded shadow"
                 >
@@ -75,7 +74,7 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            {/* Right: Profile Details */}
+            {/* 🔸 Right: Profile details and edit form */}
             <div className="md:col-span-2 bg-[#fffced] p-6 rounded-xl shadow-xl">
               <h3 className="text-xl font-semibold text-gray-700 mb-6">Profile Details</h3>
 
@@ -121,6 +120,7 @@ const ProfilePage = () => {
 
               <hr className="my-8" />
 
+              {/* 🔸 Payment section */}
               <h4 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
                 <CreditCard className="w-5 h-5 text-orange-500" />
                 Payment Method
@@ -130,16 +130,18 @@ const ProfilePage = () => {
                 Expires 10/27
               </p>
 
+              {/* 🔸 Shipping address */}
               <h4 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-orange-500" />
                 Shipping Address
               </h4>
               <p className="text-gray-600 whitespace-pre-line">
-                〒555-0000<br />
+                〜555-0000<br />
                 Osaka, Japan<br />
                 Honoka Nishimura
               </p>
 
+              {/* 🔸 Show buttons only in edit mode */}
               {editMode && (
                 <div className="mt-6 flex gap-4">
                   <button

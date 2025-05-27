@@ -1,10 +1,9 @@
-// src/components/ParticlesBackground.tsx
+
 import { useCallback } from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 import type { Engine } from 'tsparticles-engine';
 
-// ✅ propsの型定義を追加
 type Props = {
   className?: string;
 };

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form'; // for form input and validation
+import { useNavigate } from 'react-router-dom'; // to move between pages
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+// Define the data structure of the form
 type FormData = {
   name: string;
   email: string;
@@ -11,32 +12,37 @@ type FormData = {
 };
 
 const ContactPage = () => {
+  // useForm gives us tools to handle the form
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [showThankYou, setShowThankYou] = useState(false);
-  const navigate = useNavigate();
 
+  // Form state
+  const [isLoading, setIsLoading] = useState(false); // true when sending
+  const [isSubmitted, setIsSubmitted] = useState(false); // true when done
+  const [showThankYou, setShowThankYou] = useState(false); // fade in "Thank you"
+  const navigate = useNavigate(); // to go back to homepage
+
+  // This runs when the form is submitted
   const onSubmit = (data: FormData) => {
-    console.log(data);
-    setIsLoading(true);
+    console.log(data); // show input in console
+    setIsLoading(true); // show "Sending..."
 
-    // 送信中を少し見せるためにタイマーセット
+    // Wait 1 second and then mark as done
     setTimeout(() => {
       setIsLoading(false);
       setIsSubmitted(true);
-    }, 1000); // 1秒間はSending...表示
+    }, 1000);
   };
 
+  // After form is sent, wait a bit and go back to home
   useEffect(() => {
     if (isSubmitted) {
       const timer1 = setTimeout(() => {
-        setShowThankYou(true);
-      }, 300); // フェードイン遅延
+        setShowThankYou(true); // show message
+      }, 300);
 
       const timer2 = setTimeout(() => {
-        navigate('/');
-      }, 3000); // 3秒後トップリダイレクト
+        navigate('/'); // go home after 3 sec
+      }, 3000);
 
       return () => {
         clearTimeout(timer1);
@@ -50,7 +56,7 @@ const ContactPage = () => {
       <Header />
 
       <div className="max-w-3xl mx-auto py-16 px-4 text-gray-800">
-        {/* Thank youメッセージ */}
+        {/* If sent, show thank you */}
         {isSubmitted ? (
           <div className={`text-center transition-opacity duration-700 ${showThankYou ? 'opacity-100' : 'opacity-0'}`}>
             <h1 className="text-3xl font-bold mb-4">Thank you!</h1>
@@ -58,14 +64,15 @@ const ContactPage = () => {
           </div>
         ) : (
           <>
-            {/* タイトル */}
+            {/* Page title and description */}
             <h1 className="text-4xl font-bold mb-4 text-center">Contact Us</h1>
             <p className="text-center text-gray-600 mb-10">
               We'd love to hear from you. Please fill out the form below and we'll get back to you shortly.
             </p>
 
-            {/* フォーム */}
+            {/* The form starts here */}
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+              {/* Name input */}
               <div>
                 <label className="block text-sm font-medium mb-2">Name</label>
                 <input
@@ -77,6 +84,7 @@ const ContactPage = () => {
                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
               </div>
 
+              {/* Email input */}
               <div>
                 <label className="block text-sm font-medium mb-2">Email Address</label>
                 <input
@@ -94,6 +102,7 @@ const ContactPage = () => {
                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
               </div>
 
+              {/* Message input */}
               <div>
                 <label className="block text-sm font-medium mb-2">Message</label>
                 <textarea
@@ -104,6 +113,7 @@ const ContactPage = () => {
                 {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
               </div>
 
+              {/* Send button */}
               <button
                 type="submit"
                 disabled={isLoading}
@@ -115,7 +125,7 @@ const ContactPage = () => {
               </button>
             </form>
 
-            {/* FAQリンク */}
+            {/* Link to FAQ */}
             <div className="text-center text-sm text-gray-500 mt-10">
               Looking for quick answers?{' '}
               <a href="/faq" className="underline hover:text-orange-500">

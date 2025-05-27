@@ -10,9 +10,7 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-[#fffced] text-gray-700 pt-12 pb-6">
-      {/* 上段 */}
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
-        {/* ロゴ */}
         <div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">HYO</h2>
           <p className="text-sm">
@@ -72,7 +70,6 @@ const Footer = () => {
         </div>
         </div>
 
-      {/* コピーライト */}
       <div className="text-xs text-center text-gray-400 mt-6">
         © 2025 HYO Furniture. All rights reserved.
       </div>

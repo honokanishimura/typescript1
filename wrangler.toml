@@ -1,6 +1,6 @@
 name = "furniture-app"
 compatibility_date = "2025-05-20"
-pages_build_output_dir = "build" # ✅ Pagesではこの1行だけでOK！
+pages_build_output_dir = "build" 
 
 [[d1_databases]]
 binding = "DB"

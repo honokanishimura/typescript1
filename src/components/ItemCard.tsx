@@ -1,4 +1,3 @@
-// src/components/ItemCard.tsx
 import { Item } from '../types/Item';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +12,6 @@ const ItemCard = ({ item }: Props) => {
   return (
     <Link to={`/products/${item.id}`} className="block">
       <div className="relative bg-white rounded-xl shadow-sm border hover:shadow-md transition duration-300 w-full max-w-[400px] mx-auto flex flex-col">
-        {/* ✅ バッジ */}
         {showBadge && (
           <span
             className={`absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded ${
@@ -26,7 +24,6 @@ const ItemCard = ({ item }: Props) => {
           </span>
         )}
 
-        {/* ✅ 画像（大きくて安定） */}
         <div className="w-full h-[300px] overflow-hidden rounded-t-xl">
           <img
             src={item.image}
@@ -35,7 +32,6 @@ const ItemCard = ({ item }: Props) => {
           />
         </div>
 
-        {/* ✅ テキストセクション */}
         <div className="p-5 flex flex-col justify-between flex-grow">
           <div>
             <h3 className="text-lg font-semibold text-gray-800 line-clamp-1">
@@ -46,7 +42,6 @@ const ItemCard = ({ item }: Props) => {
             </p>
           </div>
 
-          {/* ✅ 価格 & 星評価 */}
           <div className="mt-3 flex items-center justify-between">
             <p className="text-orange-600 font-bold text-lg">
               ${item.price.toLocaleString()}

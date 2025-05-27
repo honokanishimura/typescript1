@@ -1,3 +1,4 @@
+// This page shows the cart items and order summary
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -5,9 +6,10 @@ import Footer from '../components/Footer';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 
 const CartPage = () => {
-  const [cartItems, setCartItems] = useState<any[]>([]);
-  const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState<any[]>([]); // List of items in the cart
+  const navigate = useNavigate(); // Navigation tool
 
+  // Load cart items from localStorage when page starts
   useEffect(() => {
     const stored = localStorage.getItem('cart');
     if (stored) {
@@ -15,20 +17,23 @@ const CartPage = () => {
     }
   }, []);
 
+  // Change the quantity of an item
   const updateQuantity = (index: number, newQty: number) => {
-    if (newQty < 1) return;
+    if (newQty < 1) return; // Prevent less than 1
     const updated = [...cartItems];
     updated[index].quantity = newQty;
     setCartItems(updated);
     localStorage.setItem('cart', JSON.stringify(updated));
   };
 
+  // Remove an item from the cart
   const removeItem = (index: number) => {
     const updated = cartItems.filter((_, i) => i !== index);
     setCartItems(updated);
     localStorage.setItem('cart', JSON.stringify(updated));
   };
 
+  // Calculate prices
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = subtotal > 0 ? 10 : 0;
   const discount = subtotal >= 200 ? 20 : 0;
@@ -47,11 +52,11 @@ const CartPage = () => {
           <p className="text-center text-gray-500">Your cart is empty.</p>
         ) : (
           <div className="grid md:grid-cols-12 gap-8">
-            {/* 商品一覧エリア */}
+            {/* Left side: list of items */}
             <div className="md:col-span-8 space-y-6">
               {cartItems.map((item, i) => (
                 <div key={i} className="flex justify-between border-b pb-6">
-                  {/* 左：画像と情報 */}
+                  {/* Left: item image and info */}
                   <div className="flex gap-4">
                     <img
                       src={item.image}
@@ -73,7 +78,7 @@ const CartPage = () => {
                     </div>
                   </div>
 
-                  {/* 右：価格と数量 */}
+                  {/* Right: price and quantity */}
                   <div className="text-right space-y-2">
                     <p className="font-semibold text-sm">${item.price.toFixed(2)}</p>
                     <div className="flex items-center border rounded w-fit mx-auto px-2 py-1">
@@ -99,7 +104,7 @@ const CartPage = () => {
               ))}
             </div>
 
-            {/* 合計エリア */}
+            {/* Right side: total summary */}
             <div className="md:col-span-4 border p-6 rounded bg-gray-50 space-y-4">
               <h2 className="font-bold text-lg">Summary</h2>
               <div className="flex justify-between text-sm">
@@ -124,16 +129,12 @@ const CartPage = () => {
                 <span>${total.toFixed(2)}</span>
               </div>
 
-              {/* クーポン or コメント */}
+              {/* Discount notice */}
               <div className="text-sm text-gray-600 flex justify-between items-center">
                 <span>
-                  {discount > 0 ? (
-                    <span className="text-orange-500 font-semibold">
-                      🎉 You unlocked a $20 discount!
-                    </span>
-                  ) : (
-                    'Add a coupon at checkout'
-                  )}
+                  {discount > 0
+                    ? 'You unlocked a $20 discount!'
+                    : 'Add a coupon at checkout'}
                 </span>
               </div>
 

@@ -12,7 +12,6 @@ import ScrollToTop from './components/ScrollToTop';
 import { CartProvider } from './context/CartContext';
 import CartPage from './pages/CartPage';
 import ConfirmPage from './pages/ConfirmPage';
-import ThankYouPage from './pages/ThankYouPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Toaster } from 'react-hot-toast';
 import EditProfilePage from './pages/EditProfilePage';
@@ -46,7 +45,6 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/confirm" element={<ConfirmPage />} />
               <Route path="/order-history" element={<OrderHistoryPage />} />
-              <Route path="/thankyou" element={<ThankYouPage />} />
             </Routes>
           </CartProvider>
         </AuthProvider>

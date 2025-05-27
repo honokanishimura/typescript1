@@ -1,6 +1,4 @@
--- schema.sql
 
--- items テーブル
 CREATE TABLE IF NOT EXISTS items (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT NOT NULL,
@@ -12,7 +10,6 @@ CREATE TABLE IF NOT EXISTS items (
   image TEXT
 );
 
--- ✅ users テーブル（これが signup/login に必要）
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   firstName TEXT NOT NULL,
