@@ -77,7 +77,7 @@ export async function onRequestGet(context: {
     // So that frontend can work with it easily
     const parsedResults = results.map((order) => ({
       ...order,
-      items: JSON.parse(order.items), // Convert string back to array
+      items: JSON.parse(order.items), // Convert string back to array 文字列
     }));
 
     // Return the list of parsed orders
