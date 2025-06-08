@@ -7,7 +7,7 @@ interface Env {
   DB: Database;
 }
 
-// ========== POST Request ==========
+// ========== POST Request ========== 可読性
 // This function handles saving a new order from the frontend (usually when user checks out)
 export async function onRequestPost(context: {
   env: Env;
@@ -46,7 +46,7 @@ export async function onRequestPost(context: {
   }
 }
 
-// ========== GET Request ==========
+// ========== GET Request ==========可読性
 // This function fetches order history for a specific user (based on userId)
 export async function onRequestGet(context: {
   env: Env;
