@@ -10,7 +10,7 @@ interface Env {
 // ======================
 // Handle GET Request
 // This function fetches all items from the `items` table in the database.
-// This is used when the frontend wants to show the product list.
+// データ取得用
 // ======================
 export async function onRequestGet(context: {
   env: Env;
@@ -48,7 +48,7 @@ export async function onRequestGet(context: {
 
 // ======================
 // Handle OPTIONS Request
-// This is required for CORS (Cross-Origin Resource Sharing) preflight
+// CORS 対応
 // Browser sends OPTIONS before POST or GET if using custom headers or methods
 // ======================
 export async function onRequestOptions(): Promise<Response> {
