@@ -64,7 +64,7 @@ export async function onRequestGet(context: {
   }
 
   try {
-    // Fetch all orders for this user, sorted by latest first
+    // Fetch all orders for this user, sorted by latest first ユーザーの利便性
     const raw = await context.env.DB.prepare(
       'SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC'
     )
