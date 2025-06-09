@@ -8,8 +8,40 @@ https://furniture-app.pages.dev
 
 ## Overview
 
-This is a responsive e-commerce furniture interface built with a modern frontend stack.  
+Built entirely solo, this project shows my ability to plan, prioritize, and ship a real-world app independently.
 It includes product browsing, cart management, user authentication, and order tracking.
+
+
+## What I Focused On
+
+- Keeping the backend lightweight and fast using Cloudflare Functions + D1
+- Structuring the frontend for readability and scalability with React + TypeScript
+- Ensuring a smooth, persistent experience for users across pages (auth + cart)
+- Prioritizing speed, code quality, and real usability over complex features
+
+
+---
+
+## Process
+**Worked consistently from design to UI/UX and feature implementation**
+  
+- **Cloudflare Functions** chosen for fast and scalable serverless logic
+- **D1 (SQLite)** used to keep data storage light and simple for small teams
+- **React Context + localStorage** handle persistent auth/cart across pages
+- Realistic flow from homepage > category > product detail > cart > checkout > history
+- Tailwind CSS used to style quickly with focus on responsive, accessible UI
+- Prioritize simple architecture, clean, reusable components, and practical features
+
+---
+
+## What Makes This Unique
+
+This project stands out for its **end-to-end solo development** and focus on startup-friendly architecture.
+
+- Entirely solo-built — backend, frontend, logic, and design
+- Realistic shopping flow with persistent user/cart data
+- Typed strictly with TypeScript for better future scaling
+- Designed with maintainability and simplicity in mind
 
 
 
