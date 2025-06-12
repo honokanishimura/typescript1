@@ -13,7 +13,7 @@ type GuestLoginResponse = {
 
 export async function loginAsGuest(): Promise<GuestLoginResponse> {
   const res = await fetch(`${API_BASE_URL}/api/users/guest`, {
-    method: 'POST',
+    method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   });
 
