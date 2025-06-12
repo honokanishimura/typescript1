@@ -20,55 +20,75 @@ const ReviewPage = () => {
 
   return (
     <>
+      {/* 背景アニメーション */}
       <ParticlesBackground />
+
+      {/* ヘッダー */}
       <Header />
 
-      <main className="max-w-2xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-6 text-center">Leave a Review</h1>
+      {/* メインフォーム */}
+      <main className="max-w-xl mx-auto px-4 py-16 relative z-10">
+        <h1 className="text-3xl font-bold mb-8 text-center">📝 Leave a Review</h1>
 
         {submitted && (
-          <p className="text-green-600 mb-6 text-center">✅ Thank you for your review!</p>
+          <p className="text-green-600 text-center font-semibold mb-6 animate-fadeIn">
+            ✅ Thank you for your review!
+          </p>
         )}
 
         <form
           onSubmit={handleSubmit}
-          className="space-y-4 p-6 bg-white rounded-lg shadow"
+          className="space-y-5 bg-white/90 p-6 rounded-lg shadow-lg backdrop-blur-md"
         >
-          <input
-            type="text"
-            placeholder="Your name"
-            required
-            className="w-full border px-4 py-2 rounded"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-          />
-          <textarea
-            placeholder="Your review"
-            required
-            className="w-full border px-4 py-2 rounded"
-            value={form.text}
-            onChange={(e) => setForm({ ...form, text: e.target.value })}
-          />
-          <select
-            className="w-full border px-4 py-2 rounded"
-            value={form.rating}
-            onChange={(e) => setForm({ ...form, rating: Number(e.target.value) })}
-          >
-            {[5, 4, 3, 2, 1].map((r) => (
-              <option key={r} value={r}>
-                {r} stars
-              </option>
-            ))}
-          </select>
+          <div>
+            <label className="block text-sm font-medium mb-1">Your Name</label>
+            <input
+              type="text"
+              placeholder="e.g. Alex"
+              required
+              className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Your Review</label>
+            <textarea
+              placeholder="Share your experience..."
+              required
+              className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
+              value={form.text}
+              onChange={(e) => setForm({ ...form, text: e.target.value })}
+              rows={4}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Rating</label>
+            <select
+              className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
+              value={form.rating}
+              onChange={(e) => setForm({ ...form, rating: Number(e.target.value) })}
+            >
+              {[5, 4, 3, 2, 1].map((r) => (
+                <option key={r} value={r}>
+                  {'★'.repeat(r)}{'☆'.repeat(5 - r)}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white py-2 rounded font-semibold"
+            className="w-full bg-orange-500 text-white font-semibold py-2 rounded hover:bg-orange-600 transition"
           >
-            Submit
+            Submit Review
           </button>
         </form>
       </main>
 
+      {/* フッター */}
       <Footer />
     </>
   );
