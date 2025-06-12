@@ -4,7 +4,7 @@ A modular shopping UI built with React and TypeScript, based on a simulated clie
 
 ## Live Demo
 
-https://furniture-app.pages.dev
+https://typescript1.pages.dev/
 
 ## Overview
 
