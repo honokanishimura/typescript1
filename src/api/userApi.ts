@@ -1,4 +1,5 @@
-// 型定義（必要なら src/types/User.ts に移してもOK）
+import { API_BASE_URL } from '../utils/apiBase'; 
+
 type GuestUser = {
   id: number;
   name: string;
@@ -10,12 +11,16 @@ type GuestLoginResponse = {
   token: string;
 };
 
-// 実装
 export async function loginAsGuest(): Promise<GuestLoginResponse> {
-  const res = await fetch('/api/users/guest');
+  const res = await fetch(`${API_BASE_URL}/api/users/guest`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
 
-  if (!res.ok) {
-    throw new Error('Failed to login as guest');
+  // JSONでなければエラーにする安全チェック
+  const contentType = res.headers.get('Content-Type') || '';
+  if (!contentType.includes('application/json')) {
+    throw new Error('Invalid response: not JSON');
   }
 
   const data: GuestLoginResponse = await res.json();
