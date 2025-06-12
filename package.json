@@ -20,6 +20,7 @@
     "@types/react-dom": "^19.1.2",
     "axios": "^1.8.4",
     "framer-motion": "^12.12.1",
+    "hono": "^4.7.11",
     "lucide-react": "^0.503.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -64,7 +65,7 @@
     ]
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250520.0",
+    "@cloudflare/workers-types": "^4.20250610.0",
     "autoprefixer": "^10.4.21",
     "babel-plugin-glsl": "^1.0.0",
     "json-server": "^1.0.0-beta.3",

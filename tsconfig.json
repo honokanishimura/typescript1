@@ -16,7 +16,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "typeRoots": ["./src/types", "./node_modules/@types"],
-    "types": []
+    "types": [],
+    "baseUrl": ".",
+    "paths": {
+      "@utils/*": ["db/utils/*"],
+      "@components/*": ["src/components/*"],
+      "@types/*": ["src/types/*"]
+    }
   },
-  "include": ["src", "functions"]
+  "include": ["src", "functions", "db", "types", "utils"]
 }

@@ -1,13 +1,11 @@
 {
-    "compilerOptions": {
-      "target": "esnext",
-      "module": "esnext",
-      "moduleResolution": "node",
-      "strict": true,
-      "esModuleInterop": true,
-      "forceConsistentCasingInFileNames": true,
-      "skipLibCheck": true
-    },
-    "include": ["./**/*.ts"]
-  }
-  
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "../",             
+    "paths": {
+      "@types/*": ["src/types/*"], 
+      "@utils/*": ["db/utils/*"]
+    }
+  },
+  "include": ["./**/*"]
+}
