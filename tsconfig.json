@@ -17,10 +17,11 @@
     "jsx": "react-jsx",
     "typeRoots": ["./src/types", "./node_modules/@types"],
     "types": [],
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
+      "@/*": ["*"],
       "@utils/*": ["db/utils/*"],
-      "@components/*": ["src/components/*"],
+      "@components/*": ["components/*"],
       "@types/*": ["src/types/*"]
     }
   },
