@@ -1,17 +1,16 @@
-/// <reference types="@cloudflare/workers-types" />
-import { Hono } from 'hono';
-
-const app = new Hono();
-
-app.get('/', (c) => {
-  return c.json({
+export const onRequestGet = () => {
+  return new Response(JSON.stringify({
     user: {
       id: 1,
       name: 'Guest User',
       email: 'guest@example.com'
     },
     token: 'mock-token-123'
+  }), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    }
   });
-});
-
-export default app;
+};
