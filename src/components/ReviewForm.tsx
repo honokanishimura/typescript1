@@ -11,7 +11,9 @@ export const ReviewForm = () => {
       body: JSON.stringify(form),
     });
     alert('Thanks for your review!');
-    location.reload();
+    location.href = '/products';
+
+
   };
 
   return (

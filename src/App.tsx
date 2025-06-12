@@ -16,7 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { Toaster } from 'react-hot-toast';
 import EditProfilePage from './pages/EditProfilePage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
-
+import ReviewPage from './pages/ReviewPage';
 
 function App() {
   return (
@@ -45,6 +45,7 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/confirm" element={<ConfirmPage />} />
               <Route path="/order-history" element={<OrderHistoryPage />} />
+              <Route path="/review" element={<ReviewPage />} />
             </Routes>
           </CartProvider>
         </AuthProvider>
