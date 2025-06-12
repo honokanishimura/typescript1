@@ -9,7 +9,7 @@ const ReviewPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await fetch('/api/reviews/', {
+    await fetch('https://typescript1.pages.dev/api/reviews', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
