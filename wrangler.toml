@@ -12,3 +12,6 @@ directory = "functions"
 
 [build]
 upload.format = "modules"
+
+[vars]
+CI = "false"
