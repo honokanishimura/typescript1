@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import ParticlesBackground from '@/components/ParticlesBackground';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import ParticlesBackground from '../components/ParticlesBackground';
+
 
 const ReviewPage = () => {
   const [form, setForm] = useState({ name: '', text: '', rating: 5 });

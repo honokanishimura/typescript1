@@ -213,8 +213,8 @@ const ProductDetail = () => {
              onClick={() => navigate('/review')}
              className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-4 py-2 rounded mb-6"
               >
-              ✍️ Add Review
-              </button>
+  ✍️ Add Review
+</button>
 
 
 
