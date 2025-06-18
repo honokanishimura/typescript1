@@ -9,7 +9,7 @@ const RecentViewed = () => {
 
   return (
     <section className="relative z-10 bg-white px-4 py-8">
-      <h2 className="text-2xl font-bold mb-4">最近見た商品</h2>
+    <h2 className="text-2xl font-bold mb-4">Recently Viewed Products</h2>
 
       {/* 横スクロールスライダー */}
       <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
