@@ -2,7 +2,8 @@ import { Item } from '../types/Item';
 import { Link } from 'react-router-dom';
 import { saveToRecentlyViewed } from '../hooks/useViewedItems';
 import { useFavoriteItems } from '../hooks/useFavoriteItems';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { FaHeart, FaRegHeart } from 'react-icons/fa'; // ✅ 追加
 
 type Props = {
   item: Item;
@@ -11,11 +12,16 @@ type Props = {
 const ItemCard = ({ item }: Props) => {
   const stars = Math.floor(item.rating ?? 4);
   const showBadge = item.badge === 'NEW' || item.badge === 'SALE';
-  const { addToFavorites } = useFavoriteItems();
+  const { addToFavorites, favorites } = useFavoriteItems();
   const [liked, setLiked] = useState(false);
 
+  useEffect(() => {
+    const exists = favorites.some(f => f.id === item.id);
+    setLiked(exists);
+  }, [favorites, item.id]);
+
   const handleFavoriteClick = (e: React.MouseEvent) => {
-    e.preventDefault(); // ✅ リンク遷移を防止
+    e.preventDefault();
     addToFavorites(item);
     setLiked(true);
   };
@@ -28,12 +34,12 @@ const ItemCard = ({ item }: Props) => {
     >
       <div className="relative bg-white rounded-xl shadow-sm border hover:shadow-md transition duration-300 w-full max-w-[400px] mx-auto flex flex-col">
         
-        {/* お気に入り ♥ ボタン */}
+        {/* ❤️ アイコン */}
         <button
           onClick={handleFavoriteClick}
           className="absolute top-2 right-2 text-red-500 text-xl z-10 hover:scale-110 transition-transform"
         >
-          {liked ? '♥' : '♡'}
+          {liked ? <FaHeart /> : <FaRegHeart />}
         </button>
 
         {showBadge && (
