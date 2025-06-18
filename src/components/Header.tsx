@@ -123,9 +123,16 @@ const Header = () => {
                   <Link to="/profile" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     My Page
                   </Link>
+
+
                   <Link to="/order-history" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Order History
                   </Link>
+
+                  <Link to="/favorites" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Favorites
+                  </Link>
+                  
                   <button
                     onClick={() => {
                       handleLogoutClick();
