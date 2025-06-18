@@ -3,36 +3,38 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ParticlesBackground from '../components/ParticlesBackground';
 import ItemCard from '../components/ItemCard';
-import { Link } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 const FavoritesPage = () => {
   const { favorites } = useFavoriteItems();
+  const navigate = useNavigate();
 
   return (
-    <div className="font-sans relative min-h-screen flex flex-col">
-      {/* 背景パーティクル */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+    <div className="min-h-screen flex flex-col font-sans relative">
+      {/* 背景アニメーション */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
         <ParticlesBackground />
       </div>
 
       {/* ヘッダー */}
       <Header />
 
-      {/* メインコンテンツ */}
-      <main className="flex-grow z-10 relative max-w-6xl mx-auto px-6 py-12">
-        <div className="mb-6">
-          <Link
-            to="/products"
-            className="inline-flex items-center text-orange-600 hover:text-orange-800 font-medium transition"
-          >
-            <FaArrowLeft className="mr-2" />
-            Back to Products
-          </Link>
-        </div>
+      {/* メイン */}
+      <main className="flex-grow max-w-6xl mx-auto px-6 py-12 z-10 relative">
+        {/* 戻るボタン */}
+        <button
+          onClick={() => navigate('/products')}
+          className="flex items-center gap-2 text-orange-600 hover:text-orange-800 text-sm font-medium mb-6"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Products
+        </button>
 
+        {/* タイトル */}
         <h1 className="text-2xl font-bold mb-6">My Favorites</h1>
 
+        {/* お気に入り一覧 */}
         {favorites.length === 0 ? (
           <p className="text-gray-600">You haven't added anything to favorites yet.</p>
         ) : (
