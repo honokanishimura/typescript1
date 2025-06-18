@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { saveToRecentlyViewed } from '../hooks/useViewedItems';
 import { useFavoriteItems } from '../hooks/useFavoriteItems';
 import { useState, useEffect } from 'react';
-import { FaHeart, FaRegHeart } from 'react-icons/fa'; // ✅ 追加
+import { FaHeart as FaHeartIcon, FaRegHeart as FaRegHeartIcon } from 'react-icons/fa'; // ✅ 修正済
 
 type Props = {
   item: Item;
@@ -39,7 +39,7 @@ const ItemCard = ({ item }: Props) => {
           onClick={handleFavoriteClick}
           className="absolute top-2 right-2 text-red-500 text-xl z-10 hover:scale-110 transition-transform"
         >
-          {liked ? <FaHeart /> : <FaRegHeart />}
+          {liked ? <FaHeartIcon /> : <FaRegHeartIcon />}
         </button>
 
         {showBadge && (
