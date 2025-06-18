@@ -1,6 +1,8 @@
 import { Item } from '../types/Item';
 import { Link } from 'react-router-dom';
 import { saveToRecentlyViewed } from '../hooks/useViewedItems';
+import { useFavoriteItems } from '../hooks/useFavoriteItems';
+import { useState } from 'react';
 
 type Props = {
   item: Item;
@@ -9,14 +11,31 @@ type Props = {
 const ItemCard = ({ item }: Props) => {
   const stars = Math.floor(item.rating ?? 4);
   const showBadge = item.badge === 'NEW' || item.badge === 'SALE';
+  const { addToFavorites } = useFavoriteItems();
+  const [liked, setLiked] = useState(false);
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.preventDefault(); // ✅ リンク遷移を防止
+    addToFavorites(item);
+    setLiked(true);
+  };
 
   return (
     <Link
       to={`/products/${item.id}`}
-      onClick={() => saveToRecentlyViewed(item)} // ✅ 関数の中に移動
+      onClick={() => saveToRecentlyViewed(item)}
       className="block"
     >
       <div className="relative bg-white rounded-xl shadow-sm border hover:shadow-md transition duration-300 w-full max-w-[400px] mx-auto flex flex-col">
+        
+        {/* お気に入り ♥ ボタン */}
+        <button
+          onClick={handleFavoriteClick}
+          className="absolute top-2 right-2 text-red-500 text-xl z-10 hover:scale-110 transition-transform"
+        >
+          {liked ? '♥' : '♡'}
+        </button>
+
         {showBadge && (
           <span
             className={`absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded ${
