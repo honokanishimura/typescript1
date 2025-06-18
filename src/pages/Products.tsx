@@ -9,6 +9,9 @@ import ItemCard from '../components/ItemCard';
 // Page layout parts
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+
+import RecentViewed from '../components/RecentViewed';
+
 // Background animation
 import ParticlesBackground from '../components/ParticlesBackground';
 
@@ -146,6 +149,8 @@ const Products = () => {
       </main>
 
       {/* Page footer */}
+      <RecentViewed />
+
       <Footer />
     </div>
   );

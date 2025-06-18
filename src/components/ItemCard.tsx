@@ -1,5 +1,6 @@
 import { Item } from '../types/Item';
 import { Link } from 'react-router-dom';
+import { saveToRecentlyViewed } from '../hooks/useViewedItems';
 
 type Props = {
   item: Item;
@@ -10,7 +11,11 @@ const ItemCard = ({ item }: Props) => {
   const showBadge = item.badge === 'NEW' || item.badge === 'SALE';
 
   return (
-    <Link to={`/products/${item.id}`} className="block">
+    <Link
+      to={`/products/${item.id}`}
+      onClick={() => saveToRecentlyViewed(item)} // ✅ 関数の中に移動
+      className="block"
+    >
       <div className="relative bg-white rounded-xl shadow-sm border hover:shadow-md transition duration-300 w-full max-w-[400px] mx-auto flex flex-col">
         {showBadge && (
           <span

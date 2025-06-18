@@ -124,7 +124,7 @@ const AuthPage = () => {
       const { user, token } = await loginAsGuest();
       localStorage.setItem('token', token);
   
-      // 🔽 name を分割して firstName, lastName に整形
+      
       const [firstName, ...lastNameParts] = user.name.split(' ');
       const lastName = lastNameParts.join(' ') || '';
   
