@@ -44,9 +44,9 @@ const RecentViewed = () => {
         </h2>
         <button
           onClick={handleClearHistory}
-          className="text-sm text-red-600 hover:underline flex items-center"
+          className="text-sm text-red-600 flex items-center"
         >
-          🗑️ Clear History
+          Clear
         </button>
       </div>
 
