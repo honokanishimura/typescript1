@@ -38,17 +38,22 @@ const FavoritesPage = () => {
         {favorites.length === 0 ? (
           <p className="text-gray-600">You haven't added anything to favorites yet.</p>
         ) : (
-          <div className="md:grid md:grid-cols-3 gap-6 overflow-hidden">
-  {/* スマホ用 横スクロール */}
-  <div className="flex md:block gap-4 overflow-x-auto scrollbar-hide">
-    {favorites.map((item) => (
-      <div key={item.id} className="min-w-[250px] flex-shrink-0 md:min-w-0 md:flex-shrink md:mb-4">
-        <ItemCard item={item} />
-      </div>
-    ))}
-  </div>
-</div>
+          <>
+            {/* モバイル: 横スクロール / タブレット以上: グリッド */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 hidden md:grid">
+              {favorites.map((item) => (
+                <ItemCard key={item.id} item={item} />
+              ))}
+            </div>
 
+            <div className="flex gap-4 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 md:hidden">
+              {favorites.map((item) => (
+                <div key={item.id} className="min-w-[250px] flex-shrink-0">
+                  <ItemCard item={item} />
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </main>
 
