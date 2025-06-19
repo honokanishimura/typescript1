@@ -82,13 +82,14 @@ const RecentViewed = () => {
             </Link>
 
             {/* 🗑️ 個別削除ボタン（右下） */}
-            <button
-              onClick={() => handleRemoveItem(item.id)}
-              className="absolute bottom-2 right-2 text-xs text-gray-400 hover:text-red-500 transition"
-              title="Remove from history"
+            <button 
+             onClick={() => handleRemoveItem(item.id)}
+             className="absolute bottom-2 right-2 text-xs text-red-500 underline hover:text-red-600 transition"
+             title="Remove from history" 
             >
-              🗑️
+            Delete
             </button>
+
           </div>
         ))}
       </div>
