@@ -24,3 +24,10 @@ export const clearRecentlyViewed = () => {
   localStorage.removeItem('recentViewed');
 };
 
+export const removeFromRecentlyViewed = (id: number) => {
+  const viewed = JSON.parse(localStorage.getItem('recentViewed') || '[]') as number[];
+  const updated = viewed.filter(itemId => itemId !== id);
+  localStorage.setItem('recentViewed', JSON.stringify(updated));
+};
+
+
