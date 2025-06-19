@@ -19,3 +19,8 @@ export const useRecentlyViewed = (): Item[] => {
     return [];
   }
 };
+
+export const clearRecentlyViewed = () => {
+  localStorage.removeItem('recentViewed');
+};
+
