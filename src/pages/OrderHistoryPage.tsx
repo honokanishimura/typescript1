@@ -1,16 +1,12 @@
-// React hooks and tools
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { fetchOrdersByUserId } from '../api/orderApi';
-
-// UI components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ParticlesBackground from '../components/ParticlesBackground';
 import { ArrowLeft } from 'lucide-react';
 
-// Order type (data structure for each order)
 type Order = {
   id?: number;
   date: string;
@@ -19,47 +15,48 @@ type Order = {
   status?: string;
 };
 
-// Pick a random status (for demo)
 const getRandomStatus = () => {
   const statuses = ['Processing', 'Shipped', 'Delivered'];
   return statuses[Math.floor(Math.random() * statuses.length)];
 };
 
-// Generate readable order ID like "ORD-000001"
 const generateOrderId = (id: number) => `ORD-${String(id).padStart(6, '0')}`;
 
-// Main component for order history page
 const OrderHistoryPage = () => {
   const navigate = useNavigate();
-  const { user } = useAuth(); // Get current user from context
+  const { user } = useAuth();
   const [orders, setOrders] = useState<Order[]>([]);
   const [sort, setSort] = useState('newest');
 
-  // BackendAPI , LoginUser history
   useEffect(() => {
     if (user?.id) {
       fetchOrdersByUserId(user.id).then((res) => {
         const withStatus = res.map((order: Order, i: number) => ({
           ...order,
-          status: getRandomStatus(), // add random status
-          id: i + 1, // just add id for display
+          status: getRandomStatus(),
+          id: i + 1,
         }));
         setOrders(withStatus);
       });
     }
   }, [user]);
 
-  // Calculate total price for each order
   const calculateTotal = (items: any[]) =>
     items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  // Sort orders based on dropdown
   const sortedOrders = [...orders].sort((a, b) => {
     if (sort === 'newest') return new Date(b.date).getTime() - new Date(a.date).getTime();
     if (sort === 'oldest') return new Date(a.date).getTime() - new Date(b.date).getTime();
     if (sort === 'highest') return (b.total ?? calculateTotal(b.items)) - (a.total ?? calculateTotal(a.items));
     return 0;
   });
+
+  const handleDelete = (id?: number) => {
+    if (window.confirm('Are you sure you want to delete your order?')) {
+      setOrders(prev => prev.filter(order => order.id !== id));
+      // Optionally: API call to delete order in backend
+    }
+  };
 
   return (
     <>
@@ -69,7 +66,6 @@ const OrderHistoryPage = () => {
       </div>
 
       <div className="max-w-5xl mx-auto px-6 py-16">
-        {/* Back button */}
         <button
           onClick={() => navigate('/')}
           className="flex items-center gap-2 text-sm text-orange-600 hover:underline hover:text-orange-700 transition mb-6"
@@ -78,7 +74,6 @@ const OrderHistoryPage = () => {
           Back to Home
         </button>
 
-        {/* Header and sorting dropdown */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Your Order History</h1>
           <select
@@ -92,15 +87,12 @@ const OrderHistoryPage = () => {
           </select>
         </div>
 
-        {/* No orders message */}
         {sortedOrders.length === 0 ? (
           <p className="text-center text-gray-500">You haven’t placed any orders yet.</p>
         ) : (
-          // Display each order
           <div className="space-y-8">
             {sortedOrders.map((order, i) => (
               <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden">
-                {/* Order header with info */}
                 <div className="bg-gray-50 px-6 py-4 flex justify-between items-center border-b">
                   <div className="text-sm text-gray-700">
                     <div className="font-semibold">Order ID: {generateOrderId(order.id ?? i + 1)}</div>
@@ -112,7 +104,6 @@ const OrderHistoryPage = () => {
                   </div>
                 </div>
 
-                {/* List of items in the order */}
                 <div className="divide-y">
                   {order.items.map((item: any, idx: number) => (
                     <div key={idx} className="flex items-center justify-between px-6 py-4">
@@ -133,11 +124,22 @@ const OrderHistoryPage = () => {
                     </div>
                   ))}
                 </div>
+
+                {/* 🔴 削除ボタン（右下、赤＆アンダーライン） */}
+                <div className="px-6 py-3 text-right">
+                  <button
+                    onClick={() => handleDelete(order.id)}
+                    className="text-red-500 underline text-sm hover:text-red-600 transition"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>
         )}
       </div>
+
       <Footer />
     </>
   );
