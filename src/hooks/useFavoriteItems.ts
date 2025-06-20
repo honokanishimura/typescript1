@@ -1,14 +1,13 @@
-import { useAuth } from '../context/AuthContext'; // 追加
+import { useAuth } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { Item } from '../types/Item';
 
-const { user } = useAuth(); // ログイン中のユーザーを取得
-const storageKey = user?.id ? `favorites_${user.id}` : 'favorites_guest';
-
 export const useFavoriteItems = () => {
+  const { user } = useAuth(); // ✅ フックの中で呼び出す
+  const storageKey = user?.id ? `favorites_${user.id}` : 'favorites_guest';
+
   const [favorites, setFavorites] = useState<Item[]>([]);
 
-  // 初回読み込み時にlocalStorageから取得
   useEffect(() => {
     const stored = localStorage.getItem(storageKey);
     if (stored) {
@@ -18,9 +17,8 @@ export const useFavoriteItems = () => {
         setFavorites([]);
       }
     }
-  }, []);
+  }, [storageKey]); // ✅ userが変わったときも再読み込み
 
-  // お気に入り追加
   const addToFavorites = (item: Item) => {
     setFavorites((prev) => {
       const exists = prev.some((f) => f.id === item.id);
@@ -31,7 +29,6 @@ export const useFavoriteItems = () => {
     });
   };
 
-  // お気に入りから削除
   const removeFromFavorites = (id: number) => {
     setFavorites((prev) => {
       const updated = prev.filter((item) => item.id !== id);
