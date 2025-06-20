@@ -4,16 +4,13 @@ import Footer from '../components/Footer';
 import ParticlesBackground from '../components/ParticlesBackground';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Item } from '../types/Item';
-
-
 
 const FavoritesPage = () => {
   const { favorites, removeFromFavorites } = useFavoriteItems();
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
-
   const scrollByAmount = 300;
 
   const scrollLeft = () => {
@@ -41,14 +38,13 @@ const FavoritesPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans relative">
-      {/* 背景アニメーション */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
         <ParticlesBackground />
       </div>
 
       <Header />
 
-      <main className="flex-grow max-w-6xl mx-auto px-6 py-12 z-10 relative">
+      <main className="flex-grow max-w-7xl mx-auto px-4 py-12 z-10 relative">
         <button
           onClick={() => navigate('/products')}
           className="flex items-center gap-2 text-orange-600 hover:text-orange-800 text-sm font-medium mb-6"
@@ -65,41 +61,42 @@ const FavoritesPage = () => {
           <p className="text-gray-600">You haven't added anything to favorites yet.</p>
         ) : (
           <>
-            {/* ← → ボタン */}
-            <button
-              onClick={scrollLeft}
-              className="hidden md:flex items-center justify-center absolute left-2 top-[60%] transform -translate-y-1/2 bg-white shadow-md p-2 rounded-full z-20"
-              aria-label="Scroll left"
-            >
-              ←
-            </button>
+            {favorites.length > 5 && (
+              <>
+                <button
+                  onClick={scrollLeft}
+                  className="hidden md:flex items-center justify-center absolute left-4 top-[50%] transform -translate-y-1/2 bg-white shadow p-2 rounded-full z-20"
+                  aria-label="Scroll left"
+                >
+                  ←
+                </button>
 
-            <button
-              onClick={scrollRight}
-              className="hidden md:flex items-center justify-center absolute right-2 top-[60%] transform -translate-y-1/2 bg-white shadow-md p-2 rounded-full z-20"
-              aria-label="Scroll right"
-            >
-              →
-            </button>
+                <button
+                  onClick={scrollRight}
+                  className="hidden md:flex items-center justify-center absolute right-4 top-[50%] transform -translate-y-1/2 bg-white shadow p-2 rounded-full z-20"
+                  aria-label="Scroll right"
+                >
+                  →
+                </button>
+              </>
+            )}
 
             {/* モバイル横スクロール */}
             <div
               ref={scrollRef}
-              className="flex gap-4 overflow-x-auto pb-2 px-2 scrollbar-thin scrollbar-thumb-gray-300 md:hidden"
+              className="md:hidden flex gap-4 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 pb-4 px-2"
             >
               {favorites.map(item => (
                 <div
                   key={item.id}
-                  className="relative min-w-[250px] max-w-[250px] flex-shrink-0 bg-white border rounded-lg p-3 shadow-sm hover:shadow-lg hover:scale-105 transition-transform duration-300"
+                  className="relative min-w-[250px] max-w-[250px] flex-shrink-0 bg-white border rounded-lg p-3 shadow-sm hover:shadow-md transition-transform"
                 >
                   <img
                     src={item.image}
                     alt={item.title}
                     className="w-full h-32 object-cover rounded mb-2"
                   />
-                  <p className="text-sm font-semibold text-gray-800 line-clamp-2 min-h-[3rem]">
-                    {item.title}
-                  </p>
+                  <p className="text-sm font-semibold text-gray-800 line-clamp-2 min-h-[3rem]">{item.title}</p>
                   <p className="text-xs text-gray-500">${item.price.toLocaleString()}</p>
                   <div className="mt-1">{renderStars(item.rating || 4)}</div>
 
@@ -114,21 +111,19 @@ const FavoritesPage = () => {
               ))}
             </div>
 
-            {/* PC・タブレット用グリッド */}
-            <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+            {/* PC・タブレット表示：グリッド */}
+            <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
               {favorites.map(item => (
                 <div
                   key={item.id}
-                  className="relative bg-white border rounded-lg p-3 shadow-sm hover:shadow-lg hover:scale-105 transition-transform duration-300"
+                  className="relative bg-white border rounded-lg p-3 shadow-sm hover:shadow-lg transition-transform"
                 >
                   <img
                     src={item.image}
                     alt={item.title}
                     className="w-full h-32 object-cover rounded mb-2"
                   />
-                  <p className="text-sm font-semibold text-gray-800 line-clamp-2 min-h-[3rem]">
-                    {item.title}
-                  </p>
+                  <p className="text-sm font-semibold text-gray-800 line-clamp-2 min-h-[3rem]">{item.title}</p>
                   <p className="text-xs text-gray-500">${item.price.toLocaleString()}</p>
                   <div className="mt-1">{renderStars(item.rating || 4)}</div>
 
