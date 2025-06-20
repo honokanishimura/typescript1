@@ -61,7 +61,7 @@ const FavoritesPage = () => {
           My Favorites
         </h1>
 
-        {items.length === 0 ? (
+        {favorites.length === 0 ? (
           <p className="text-gray-600">You haven't added anything to favorites yet.</p>
         ) : (
           <>
@@ -87,7 +87,7 @@ const FavoritesPage = () => {
               ref={scrollRef}
               className="flex gap-4 overflow-x-auto pb-2 px-2 scrollbar-thin scrollbar-thumb-gray-300 md:hidden"
             >
-              {items.map(item => (
+              {favorites.map(item => (
                 <div
                   key={item.id}
                   className="relative min-w-[250px] max-w-[250px] flex-shrink-0 bg-white border rounded-lg p-3 shadow-sm hover:shadow-lg hover:scale-105 transition-transform duration-300"
@@ -116,7 +116,7 @@ const FavoritesPage = () => {
 
             {/* PC・タブレット用グリッド */}
             <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-              {items.map(item => (
+              {favorites.map(item => (
                 <div
                   key={item.id}
                   className="relative bg-white border rounded-lg p-3 shadow-sm hover:shadow-lg hover:scale-105 transition-transform duration-300"
