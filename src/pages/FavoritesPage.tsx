@@ -7,9 +7,10 @@ import { ArrowLeft } from 'lucide-react';
 import { useState, useRef } from 'react';
 import { Item } from '../types/Item';
 
+
+
 const FavoritesPage = () => {
   const { favorites, removeFromFavorites } = useFavoriteItems();
-  const [items, setItems] = useState<Item[]>(favorites);
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +26,6 @@ const FavoritesPage = () => {
 
   const handleRemove = (id: number) => {
     removeFromFavorites(id);
-    setItems(prev => prev.filter(item => item.id !== id));
   };
 
   const renderStars = (rating: number) => {
