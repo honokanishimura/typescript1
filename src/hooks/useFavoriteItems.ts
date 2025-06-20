@@ -1,15 +1,16 @@
-// src/hooks/useFavoriteItems.ts
+import { useAuth } from '../context/AuthContext'; // 追加
 import { useEffect, useState } from 'react';
 import { Item } from '../types/Item';
 
-const STORAGE_KEY = 'favorites';
+const { user } = useAuth(); // ログイン中のユーザーを取得
+const storageKey = user?.id ? `favorites_${user.id}` : 'favorites_guest';
 
 export const useFavoriteItems = () => {
   const [favorites, setFavorites] = useState<Item[]>([]);
 
   // 初回読み込み時にlocalStorageから取得
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(storageKey);
     if (stored) {
       try {
         setFavorites(JSON.parse(stored));
@@ -25,7 +26,7 @@ export const useFavoriteItems = () => {
       const exists = prev.some((f) => f.id === item.id);
       if (exists) return prev;
       const updated = [...prev, item];
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      localStorage.setItem(storageKey, JSON.stringify(updated));
       return updated;
     });
   };
@@ -34,7 +35,7 @@ export const useFavoriteItems = () => {
   const removeFromFavorites = (id: number) => {
     setFavorites((prev) => {
       const updated = prev.filter((item) => item.id !== id);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      localStorage.setItem(storageKey, JSON.stringify(updated));
       return updated;
     });
   };
